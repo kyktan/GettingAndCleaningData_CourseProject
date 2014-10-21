@@ -99,18 +99,11 @@ extractData$activity <- activityLabels[match(extractData$activity, activityLabel
 # t: time domain signal
 # f: frequency domain signal
 
-# fBodyGyroJerkMag-mean() => meanFreqBodyAngularVelocityMagnitude
+pattern <- c("Acc", "Gyro", "Mag", "^t", "^f", "-",
+             "mean\\(\\)", "std\\(\\)", "X", "Y", "Z")
 
-pattern <- c("Acc", "Gyro",
-             "Mag", "^t", "^f", "-",
-             "mean\\(\\)", "std\\(\\)", 
-             "X", "Y", "Z")
-
-replacement <- c("Acceleration", "Gyroscope",
-                 "Magnitude", "time", "frequency", "",
-                 "Mean", "StandardDeviation", 
-                 "OfX", "OfY", "OfZ")
-
+replacement <- c("Acceleration", "Gyroscope", "Magnitude", "time", "frequency", "",
+                 "Mean", "StandardDeviation", "OfX", "OfY", "OfZ")
 
 # Define a function to find and replace the variable names according to pattern
 findAndReplace <- function(astring, pattset, replset) {
