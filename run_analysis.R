@@ -33,9 +33,6 @@ xtrain <- read.table("./UCI HAR Dataset/train/X_train.txt",
 ytrain <- read.table("./UCI HAR Dataset/train/y_train.txt", 
                       col.names=c("activity"))
 
-# Merge the subject IDs, activity data and feature data together
-trainData <- cbind(subjectTrain, ytrain, xtrain)
-
 # ---------------------------------------------------------
 # Read in the subject and feature data from the test data
 # ---------------------------------------------------------
@@ -52,12 +49,15 @@ xtest <- read.table("./UCI HAR Dataset/test/X_test.txt",
 ytest <- read.table("./UCI HAR Dataset/test/y_test.txt", 
                      col.names=c("activity"))
 
-# Merge the subject IDs, activity data and feature data together
-testData <- cbind(subjectTest, ytest, xtest)
-
 # ---------------------------------------------------------
 # 1. Merges the training and test sets to create one data set
 # ---------------------------------------------------------
+
+# Merge the training set subject IDs, activity and feature data
+trainData <- cbind(subjectTrain, ytrain, xtrain)
+
+# Merge the test set subject IDs, activity data and feature data 
+testData <- cbind(subjectTest, ytest, xtest)
 
 # Add a new column to the train and test data to indicate data type 
 # ie. train or test
@@ -72,12 +72,11 @@ mergedData <- rbind(trainData, testData)
 # ---------------------------------------------------------
 
 # Get the column numbers that contain mean() and std()
-# The "meanFreq" and gravityMean" items have (intentionally) been left out
-keepCols <- sort(c(grep("mean\\(\\)", names(trainData)), 
-                   grep("std\\(\\)", names(trainData))))
+expr <- "subject|activity|[Mm]ean|std\\(\\)"
+keepCols <- grep(expr, names(trainData))
 
 # Extract out the columns containing mean and std
-extractData <- mergedData[ , c(1, 2, keepCols)]
+extractData <- mergedData[ , keepCols]
 
 # ---------------------------------------------------------
 # 3. Use descriptive activity names to name activities in the data set
@@ -99,11 +98,16 @@ extractData$activity <- activityLabels[match(extractData$activity, activityLabel
 # t: time domain signal
 # f: frequency domain signal
 
-pattern <- c("Acc", "Gyro", "Mag", "^t", "^f", "-",
-             "mean\\(\\)", "std\\(\\)", "X", "Y", "Z")
+pattern <- c("Acc", "Gyro", "\\(|\\)|-|\\.", 
+             "Mag", "^t", "tBody", "^f",
+             "mean", "std", "Freq",
+             "X", "Y", "Z")
 
-replacement <- c("Acceleration", "Gyroscope", "Magnitude", "time", "frequency", "",
-                 "Mean", "StandardDeviation", "OfX", "OfY", "OfZ")
+replacement <- c("Acceleration", "Gyroscope", "",
+                 "Magnitude", "time", "timeBody", "frequency",
+                 "Mean", "StandardDeviation", "Frequency",
+                 "OfX", "OfY", "OfZ")
+
 
 # Define a function to find and replace the variable names according to pattern
 findAndReplace <- function(astring, pattset, replset) {
@@ -118,7 +122,8 @@ findAndReplace <- function(astring, pattset, replset) {
 }
 
 # Apply the renaming function above to the variable names
-newVarNames <- sapply(names(extractData), findAndReplace, pattset=pattern, replset=replacement)
+newVarNames <- sapply(make.names(names(extractData)), findAndReplace, 
+                      pattset=pattern, replset=replacement)
 newVarNames <- unname(newVarNames)
 
 # Rename the columns
@@ -136,5 +141,4 @@ meltedData <- melt(extractData, id=c("subject", "activity"))
 subjectActivityMeans <- dcast(meltedData, subject + activity ~ variable, mean)
 
 # Write the data to a file for uploading
-write.table(subjectActivityMeans, file="tidydataset.txt", row.names=FALSE)
-
+write.table(subjectActivityMeans, file="tidy_data_set.txt", row.names=FALSE)

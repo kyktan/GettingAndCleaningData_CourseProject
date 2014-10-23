@@ -25,7 +25,7 @@ A single R script *run_analysis.R* contains code to perform all five required ac
 
 2. Extract only the measurements on the mean and standard deviation for each measurement
 
-    - Use _grep()_ to identify the variables containing _mean()_ and _std()_
+    - Use _grep()_ to identify the variables containing _mean_ and _std()_
     - Subset only the columns that contain the required variables
     
 3. Use descriptive activity names to name the activities in the data set

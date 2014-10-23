@@ -63,11 +63,7 @@ Step 4: Merged the training data and the test data to obtain a merged dataset (�
 
 Step 5: Created a new data frame with only the measurements on the mean and standard deviation (“extractData”)
 	
-	Note that the only the variables with mean() and std() are retained. 
-
-	Variables with “meanFreq” and “gravityMean” have not been included.
-
-	This leaves 66 variables that remain.
+	Note that only the variables subject, activity and those with mean and std() are retained. This leaves 88 variables.
 
 Step 6: Replaced the activity IDs in the dataset with the description of the activities
 
@@ -103,7 +99,7 @@ Step 10: Write the data to a file (“tidydataset.txt”)
 
 ** Tidy data set**
 
-The resulting data set in tidydataset.txt contains 180 observations (30 subjects x 6 activities) by 68 variables (subject ID, activity and 66 mean and std averages)
+The resulting data set in tidydataset.txt contains 180 observations (30 subjects x 6 activities) by 88 variables (subject ID, activity and 86 mean and std averages)
 
 The list of variables are:
 
@@ -127,54 +123,75 @@ The list of variables are:
 18 timeBodyAccelerationJerkStandardDeviationOfX
 19 timeBodyAccelerationJerkStandardDeviationOfY
 20 timeBodyAccelerationJerkStandardDeviationOfZ
-21 timeBodyRawGyroscopeMeanOfX
-22 timeBodyRawGyroscopeMeanOfY
-23 timeBodyRawGyroscopeMeanOfZ
-24 timeBodyRawGyroscopeStandardDeviationOfX
-25 timeBodyRawGyroscopeStandardDeviationOfY
-26 timeBodyRawGyroscopeStandardDeviationOfZ
-27 timeBodyRawGyroscopeJerkMeanOfX
-28 timeBodyRawGyroscopeJerkMeanOfY
-29 timeBodyRawGyroscopeJerkMeanOfZ
-30 timeBodyRawGyroscopeJerkStandardDeviationOfX
-31 timeBodyRawGyroscopeJerkStandardDeviationOfY
-32 timeBodyRawGyroscopeJerkStandardDeviationOfZ
+21 timeBodyGyroscopeMeanOfX
+22 timeBodyGyroscopeMeanOfY
+23 timeBodyGyroscopeMeanOfZ
+24 timeBodyGyroscopeStandardDeviationOfX
+25 timeBodyGyroscopeStandardDeviationOfY
+26 timeBodyGyroscopeStandardDeviationOfZ
+27 timeBodyGyroscopeJerkMeanOfX
+28 timeBodyGyroscopeJerkMeanOfY
+29 timeBodyGyroscopeJerkMeanOfZ
+30 timeBodyGyroscopeJerkStandardDeviationOfX
+31 timeBodyGyroscopeJerkStandardDeviationOfY
+32 timeBodyGyroscopeJerkStandardDeviationOfZ
 33 timeBodyAccelerationMagnitudeMean
 34 timeBodyAccelerationMagnitudeStandardDeviation
 35 timeGravityAccelerationMagnitudeMean
 36 timeGravityAccelerationMagnitudeStandardDeviation
 37 timeBodyAccelerationJerkMagnitudeMean
 38 timeBodyAccelerationJerkMagnitudeStandardDeviation
-39 timeBodyRawGyroscopeMagnitudeMean
-40 timeBodyRawGyroscopeMagnitudeStandardDeviation
-41 timeBodyRawGyroscopeJerkMagnitudeMean
-42 timeBodyRawGyroscopeJerkMagnitudeStandardDeviation
+39 timeBodyGyroscopeMagnitudeMean
+40 timeBodyGyroscopeMagnitudeStandardDeviation
+41 timeBodyGyroscopeJerkMagnitudeMean
+42 timeBodyGyroscopeJerkMagnitudeStandardDeviation
 43 frequencyBodyAccelerationMeanOfX
 44 frequencyBodyAccelerationMeanOfY
 45 frequencyBodyAccelerationMeanOfZ
 46 frequencyBodyAccelerationStandardDeviationOfX
 47 frequencyBodyAccelerationStandardDeviationOfY
 48 frequencyBodyAccelerationStandardDeviationOfZ
-49 frequencyBodyAccelerationJerkMeanOfX
-50 frequencyBodyAccelerationJerkMeanOfY
-51 frequencyBodyAccelerationJerkMeanOfZ
-52 frequencyBodyAccelerationJerkStandardDeviationOfX
-53 frequencyBodyAccelerationJerkStandardDeviationOfY
-54 frequencyBodyAccelerationJerkStandardDeviationOfZ
-55 frequencyBodyRawGyroscopeMeanOfX
-56 frequencyBodyRawGyroscopeMeanOfY
-57 frequencyBodyRawGyroscopeMeanOfZ
-58 frequencyBodyRawGyroscopeStandardDeviationOfX
-59 frequencyBodyRawGyroscopeStandardDeviationOfY
-60 frequencyBodyRawGyroscopeStandardDeviationOfZ
-61 frequencyBodyAccelerationMagnitudeMean
-62 frequencyBodyAccelerationMagnitudeStandardDeviation
-63 frequencyBodyBodyAccelerationJerkMagnitudeMean
-64 frequencyBodyBodyAccelerationJerkMagnitudeStandardDeviation
-65 frequencyBodyBodyRawGyroscopeMagnitudeMean
-66 frequencyBodyBodyRawGyroscopeMagnitudeStandardDeviation
-67 frequencyBodyBodyRawGyroscopeJerkMagnitudeMean
-68 frequencyBodyBodyRawGyroscopeJerkMagnitudeStandardDeviation
+49 frequencyBodyAccelerationMeanFrequencyOfX
+50 frequencyBodyAccelerationMeanFrequencyOfY
+51 frequencyBodyAccelerationMeanFrequencyOfZ
+52 frequencyBodyAccelerationJerkMeanOfX
+53 frequencyBodyAccelerationJerkMeanOfY
+54 frequencyBodyAccelerationJerkMeanOfZ
+55 frequencyBodyAccelerationJerkStandardDeviationOfX
+56 frequencyBodyAccelerationJerkStandardDeviationOfY
+57 frequencyBodyAccelerationJerkStandardDeviationOfZ
+58 frequencyBodyAccelerationJerkMeanFrequencyOfX
+59 frequencyBodyAccelerationJerkMeanFrequencyOfY
+60 frequencyBodyAccelerationJerkMeanFrequencyOfZ
+61 frequencyBodyGyroscopeMeanOfX
+62 frequencyBodyGyroscopeMeanOfY
+63 frequencyBodyGyroscopeMeanOfZ
+64 frequencyBodyGyroscopeStandardDeviationOfX
+65 frequencyBodyGyroscopeStandardDeviationOfY
+66 frequencyBodyGyroscopeStandardDeviationOfZ
+67 frequencyBodyGyroscopeMeanFrequencyOfX
+68 frequencyBodyGyroscopeMeanFrequencyOfY
+69 frequencyBodyGyroscopeMeanFrequencyOfZ
+70 frequencyBodyAccelerationMagnitudeMean
+71 frequencyBodyAccelerationMagnitudeStandardDeviation
+72 frequencyBodyAccelerationMagnitudeMeanFrequency
+73 frequencyBodyBodyAccelerationJerkMagnitudeMean
+74 frequencyBodyBodyAccelerationJerkMagnitudeStandardDeviation
+75 frequencyBodyBodyAccelerationJerkMagnitudeMeanFrequency
+76 frequencyBodyBodyGyroscopeMagnitudeMean
+77 frequencyBodyBodyGyroscopeMagnitudeStandardDeviation
+78 frequencyBodyBodyGyroscopeMagnitudeMeanFrequency
+79 frequencyBodyBodyGyroscopeJerkMagnitudeMean
+80 frequencyBodyBodyGyroscopeJerkMagnitudeStandardDeviation
+81 frequencyBodyBodyGyroscopeJerkMagnitudeMeanFrequency
+82 angletimeBodyAccelerationMeangravity
+83 angletimeBodyAccelerationJerkMeangravityMean
+84 angletimeBodyGyroscopeMeangravityMean
+85 angletimeBodyGyroscopeJerkMeangravityMean
+86 angleOfXgravityMean
+87 angleOfYgravityMean
+88 angleOfZgravityMean
+
 
 **Description of variables** 
 
